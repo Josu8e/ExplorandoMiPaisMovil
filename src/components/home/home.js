@@ -10,6 +10,8 @@ import {
   StyleSheet
 } from 'react-native';
 
+import ListExcursions from '../listExcursions';
+
 class Home extends Component{
 
   constructor(){
@@ -40,10 +42,13 @@ class Home extends Component{
           onChange={(isOpen) => this.updateMenu(isOpen)}
           style={{flex: 1}}
         >
+          {/* Header */}
           <View style={[{flex: 1}, styles.container]}>
             <Header toggle={this.toggle.bind(this)} />
-            <Text style={{color: 'white'}}>Home</Text>
+            {/* Excursions */}
+            <ListExcursions/>
           </View>
+
         </SideMenu>
       </View>
 
@@ -53,7 +58,7 @@ class Home extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white'
+    backgroundColor: '#f0f0f0'
   }
 });
 

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import forest from '../images/forest_original.jpg';
-import video from '../promoVideo/beachhttps://github.com/Josu8e/ExplorandoMiPaisMovil.git.mp4';
-import hashtag from '../images/hashtag.png';
+import video from '../promoVideo/beach.mp4';
 
 import {
   Text,
@@ -22,10 +20,9 @@ class Login extends Component{
 
     return(
       <View>
-        {/* Background Image */}
+        {/* Background Video */}
         <Video repeat source={video} resizeMode="cover" style={StyleSheet.absoluteFill} />
-        {/*<Image source={forest}*/}
-               {/*style = {styles.container}/>*/}
+
         <View style = {styles.hashtag}>
           {/* Hashtag Text */}
           <Text style = {styles.hastagText}>
