@@ -44,7 +44,7 @@ class Home extends Component{
         >
           {/* Header */}
           <View style={[{flex: 1}, styles.container]}>
-            <Header toggle={this.toggle.bind(this)} />
+            <Header toggle={this.toggle.bind(this)}/>
             {/* Excursions */}
             <ListExcursions/>
           </View>

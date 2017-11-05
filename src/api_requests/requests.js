@@ -9,14 +9,16 @@ function getExcursions(callback) {
         'quota': '25',
         'mainImage': 'http://www.bosquedepaz.com/wp-content/uploads/2015/01/LaPaz.jpg',
         'images': [],
-        'video_url' : 'https://youtu.be/u5SLOus_u98'
+        'video_url' : 'https://youtu.be/u5SLOus_u98',
+        'price': 25000
       },
       {
         'name': 'Rio Celeste, Alajuela, Costa Rica',
         'quota': '25',
         'mainImage': 'https://www.anywhere.com/img-a/tour/celeste-river-tenorio-volcano-adventure-arenal-costa-rica/21.jpg',
         'images': [],
-        'video_url' : 'https://youtu.be/pHDnWGCLeVY'
+        'video_url' : 'https://youtu.be/pHDnWGCLeVY',
+        'price': 65000
       }
     ];
   callback(data);

@@ -1,4 +1,6 @@
 rootProject.name = 'exploraTuPais'
+include ':react-native-send-sms'
+project(':react-native-send-sms').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-send-sms/android/app')
 include ':react-native-video'
 project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
 include ':react-native-vector-icons'

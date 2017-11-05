@@ -1,5 +1,6 @@
 {
   'api_url': '',
   'facebook_sdk_key': '',
-  'google_sdk_key': ''
+  'google_sdk_key': '',
+  'youtube_api_key': 'AIzaSyAjMTYCLQ02lgn3NdJJhrvys-cDamZ-cB4'
 }

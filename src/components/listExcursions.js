@@ -7,7 +7,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TouchableWithoutFeedback
+  TouchableHighlight
 } from 'react-native';
 
 import {
@@ -37,27 +37,33 @@ class ListExcursions extends Component{
     });
   }
 
+  showExcursion(excursion){
+    Actions.excursion({excursion: excursion});
+  }
+
   _renderItem(item){
     return(
-      <TouchableWithoutFeedback onPress={() => { Actions.excursion.bind(this)}}>
-        <Card styles={{card: {width: 350,flex: 1,
-                      flexDirection: 'column', marginBottom: 30}}
-                    }
-        >
-          <CardImage>
-            <Image
-              style={{width: 350, height: 200}}
-              source={{uri: item.mainImage}}
-            />
-          </CardImage>
-          <CardTitle>
-            <Text style={styles.title}>{item.name}</Text>
-          </CardTitle>
-          <CardContent>
-
-          </CardContent>
-        </Card>
-      </TouchableWithoutFeedback>
+      <TouchableHighlight onPress={() => {this.showExcursion(item)}}
+                          underlayColor = 'azure'>
+        <View>
+          <Card styles={{card: {width: 330,flex: 1,
+                        flexDirection: 'column', marginBottom: 30}}
+                      }
+          >
+            <CardImage>
+              <Image
+                style={{width: 350, height: 200}}
+                source={{uri: item.mainImage}}
+              />
+            </CardImage>
+            <CardTitle>
+              <Text style={styles.title}>{item.name}</Text>
+            </CardTitle>
+            <CardContent>
+            </CardContent>
+          </Card>
+        </View>
+      </TouchableHighlight>
     )
   }
 

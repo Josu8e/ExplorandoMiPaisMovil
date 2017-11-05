@@ -21,7 +21,12 @@ class Login extends Component{
     return(
       <View>
         {/* Background Video */}
-        <Video repeat source={video} resizeMode="cover" style={StyleSheet.absoluteFill} />
+        <Video repeat source={video}
+               resizeMode="cover"
+               style={StyleSheet.absoluteFill}
+               muted={true}
+               playInBackground={false}
+        />
 
         <View style = {styles.hashtag}>
           {/* Hashtag Text */}
@@ -35,7 +40,7 @@ class Login extends Component{
             name="facebook"
             backgroundColor="#3b5998"
             {...iconStyles}
-            onPress={() => { Actions.home(); }}
+            onPress={() => { Actions.pop(); }}
           >
             Login with Facebook
           </Icon.Button>
@@ -43,7 +48,7 @@ class Login extends Component{
             name="google"
             backgroundColor="#DD4B39"
             {...iconStyles}
-            onPress={() => { Actions.home(); }}
+            onPress={() => { Actions.pop(); }}
           >
             Or with Google
           </Icon.Button>
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
   buttons: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    margin: 40,
+    margin: 20,
     marginTop: (height / 2) - 100
   }
 
