@@ -1,8 +1,10 @@
 <resources>
-
+    <color name="primary_dark">#33333380</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
     </style>
 
 </resources>

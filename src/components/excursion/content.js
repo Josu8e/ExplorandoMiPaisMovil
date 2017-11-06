@@ -9,9 +9,10 @@ import{
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import call from 'react-native-phone-call';
-import Gallery from 'react-native-image-gallery';
+import GalleryView from '../gallery/gallery';
 
 class Content extends Component{
+
   render(){
     return(
 
@@ -52,36 +53,38 @@ class Content extends Component{
 
         <View style={styles.hr}/>
 
-        <View>
-          <Gallery
-            style={styles.gallery}
-            images={[
-              {
-                caption: 'Remote image with supplied dimensions',
-                source: { uri: this.props.info.mainImage }
-              },
+        <Text style={styles.contactText}>Galería</Text>
+        {/*TODO: Permitir ver a pantalla completa*/}
+        <GalleryView
+          style={styles.gallery}
+          images={[
+            {
+              caption: 'Remote image with supplied dimensions',
+              source: { uri: this.props.info.mainImage }
+            },
 
-            ]}
-          />
-          <View style={{bottom: 0 , height: 30, backgroundColor: 'rgba(0, 0, 0, 0.4)', width: '100%', position: 'absolute', justifyContent: 'center' }}>
-            <Text style={{ textAlign: 'center', color: 'white', fontSize: 15, fontStyle: 'italic'}}>Descripción del sitio</Text>
-          </View>
-        </View>
+          ]}
+        />
 
         <View style ={styles.hr}></View>
+
+        <View style = {styles.submitButton}>
+          <Text style={{color: '#fff'}}>Reservar</Text>
+        </View>
 
       </View>
     )
   }
 }
 
+//TODO: agregar touchable with feedback a los botones
+
 const styles = {
   wrapper: {
     flex: 1,
     zIndex: 10,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    margin: 10,
+    marginBottom: 50,
     padding: 24,
     position: 'relative',
     backgroundColor: 'white'
@@ -117,6 +120,16 @@ const styles = {
     marginTop: 10,
     borderBottomColor: '#b3b3b3',
     borderBottomWidth: 1
+  },
+  submitButton: {
+    height: 40,
+    margin: 40,
+    marginBottom: 0,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#31c753',
+    borderRadius: 15
   }
 }
 

@@ -47,7 +47,7 @@ class ListExcursions extends Component{
                           underlayColor = 'azure'>
         <View>
           <Card styles={{card: {width: 330,flex: 1,
-                        flexDirection: 'column', marginBottom: 30}}
+                        flexDirection: 'column', marginBottom: 30, backgroundColor: 'white'}}
                       }
           >
             <CardImage>

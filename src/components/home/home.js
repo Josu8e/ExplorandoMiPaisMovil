@@ -3,6 +3,7 @@ import Header from './header';
 import Menu from './menu';
 
 import SideMenu from 'react-native-side-menu';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
 import {
   Text,
@@ -12,14 +13,41 @@ import {
 
 import ListExcursions from '../listExcursions';
 
+const excursions = () => <ListExcursions/>
+const themes = () => <View style={{ flex: 1}} />;
+const places = () => <View style={{ flex: 1}} />;
+
 class Home extends Component{
 
   constructor(){
     super();
     this.state = {
-      isOpen: false
+      isOpen: false,
+      index: 0,
+      routes: [
+        {key: 'excursions', title: 'Excursiones'},
+        {key: 'themes', title: 'Temas'},
+        {key: 'places', title: 'Lugares'}
+      ]
     }
   }
+
+  _handleIndexChange = index => this.setState({ index });
+
+  _renderHeader = props =>
+      <TabBar {...props}
+              scrollEnabled = {false}
+              indicatorStyle={styles.indicator}
+              style={styles.tabbar}
+              tabStyle={styles.tab}
+              labelStyle={styles.label}
+      />
+
+  _renderScene = SceneMap({
+    'excursions': excursions,
+    'themes': themes,
+    'places': places
+  });
 
   toggle(){
     this.setState({
@@ -46,7 +74,13 @@ class Home extends Component{
           <View style={[{flex: 1}, styles.container]}>
             <Header toggle={this.toggle.bind(this)}/>
             {/* Excursions */}
-            <ListExcursions/>
+            <TabViewAnimated
+              style={{flex: 1, backgroundColor: '#f0f0f0'}}
+              navigationState={this.state}
+              renderScene={this._renderScene}
+              renderHeader={this._renderHeader}
+              onIndexChange={this._handleIndexChange}
+            />
           </View>
 
         </SideMenu>
@@ -59,6 +93,19 @@ class Home extends Component{
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f0f0'
+  },
+  tabbar: {
+    backgroundColor:  'white'
+  },
+  tab: {
+    width: 120
+  },
+  indicator: {
+    backgroundColor: '#1E90FF',
+  },
+  label: {
+    color: 'black',
+    fontSize: 12
   }
 });
 

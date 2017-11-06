@@ -17,8 +17,7 @@ class App extends Component{
         <Scene key = 'root'>
           <Scene key = 'home' component = {Home} title = 'Inicio' hideNavBar={true}></Scene>
           <Scene key = 'login' component = {Login} direction="vertical" title = 'Ingresar' hideNavBar={true}></Scene>
-          <Scene key = 'excursion' component = {Excursion} direction = 'vertical' hideNavBar = {true}>
-          </Scene>
+          <Scene key = 'excursion' component = {Excursion} direction = 'vertical' hideNavBar = {true}></Scene>
         </Scene>
       </Router>
     );
