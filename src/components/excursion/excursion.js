@@ -12,6 +12,7 @@ import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
 import Background from './background';
 
 class Excursion extends Component{
+
   render(){
     return(
       <ParallaxScroll renderHeader={({ animatedValue }) => <Header title = {this.props.excursion.name}/>}

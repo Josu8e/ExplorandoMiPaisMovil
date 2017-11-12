@@ -3,9 +3,15 @@ import React, {Component} from 'react';
 import{
   View,
   Text,
+  TextInput,
   Image,
-  FlatList
+  FlatList,
+  TouchableWithoutFeedback,
+  ToastAndroid
 } from 'react-native';
+
+import Modal from 'react-native-modal';
+import { Actions } from 'react-native-router-flux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import call from 'react-native-phone-call';
@@ -13,10 +19,39 @@ import GalleryView from '../gallery/gallery';
 
 class Content extends Component{
 
+  state = {
+    modalVisible: false
+  }
+
+  setModalVisible(visible){
+    this.setState({
+      modalVisible: visible
+    });
+  }
+
   render(){
     return(
 
       <View style = {styles.wrapper}>
+
+        <Modal style = {styles.modal}
+               isVisible={this.state.modalVisible}
+               onBackdropPress = {() => {this.setModalVisible(false)}}>
+          <View style = {styles.modalContent}>
+
+            <TextInput placeholder='Número de reservas' style={{width: '65%', textAlign: 'center'}} keyboardType='numeric'/>
+
+            <TouchableWithoutFeedback onPress = {() => {
+                Actions.pop();
+                ToastAndroid.show('Se registro su reserva', ToastAndroid.SHORT);
+              }}>
+                <View style = {styles.modalButton}>
+                  <Text style={{color: '#fff'}}>Reservar</Text>
+                </View>
+              </TouchableWithoutFeedback>
+          </View>
+        </Modal>
+
         <Text style={styles.price}>&#8353; {this.props.info.price}</Text>
         <View style = {styles.info}>
           <Text style={styles.infoText}>Cupo de la excursión : </Text>
@@ -35,7 +70,7 @@ class Content extends Component{
             name = 'call'
             onPress = {() => {
               const args = {
-                number: '9093900003',
+                number: '61963168',
                 prompt: true
               }
               call(args).catch(console.error)
@@ -68,9 +103,13 @@ class Content extends Component{
 
         <View style ={styles.hr}></View>
 
-        <View style = {styles.submitButton}>
-          <Text style={{color: '#fff'}}>Reservar</Text>
-        </View>
+        <TouchableWithoutFeedback onPress = {() => {
+          this.setModalVisible(true);
+        }}>
+          <View style = {styles.submitButton}>
+            <Text style={{color: '#fff'}}>Reservar</Text>
+          </View>
+        </TouchableWithoutFeedback>
 
       </View>
     )
@@ -130,6 +169,28 @@ const styles = {
     justifyContent: 'center',
     backgroundColor: '#31c753',
     borderRadius: 15
+  },
+  modalButton: {
+    height: 40,
+    width: '65%',
+    marginBottom: 0,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#31c753',
+    borderRadius: 15
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 6,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
   }
 }
 
