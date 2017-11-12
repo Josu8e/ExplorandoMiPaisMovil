@@ -12,9 +12,10 @@ import {
 } from 'react-native';
 
 import ListExcursions from '../listExcursions';
+import ListThemes from '../themesExcursion';
 
 const excursions = () => <ListExcursions/>
-const themes = () => <View style={{ flex: 1}} />;
+const themes = () => <ListThemes/>;
 const places = () => <View style={{ flex: 1}} />;
 
 class Home extends Component{

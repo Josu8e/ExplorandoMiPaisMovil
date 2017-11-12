@@ -14,8 +14,7 @@ import {
   Card,
   CardImage,
   CardTitle,
-  CardContent,
-  CardAction
+  CardContent
 } from 'react-native-card-view';
 
 import {getExcursions} from "../api_requests/requests";
@@ -59,8 +58,7 @@ class ListExcursions extends Component{
             <CardTitle>
               <Text style={styles.title}>{item.name}</Text>
             </CardTitle>
-            <CardContent>
-            </CardContent>
+
           </Card>
         </View>
       </TouchableHighlight>

@@ -11,7 +11,6 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import IconEnt from 'react-native-vector-icons/Entypo';
 
 const {width, height} = Dimensions.get('window');
 

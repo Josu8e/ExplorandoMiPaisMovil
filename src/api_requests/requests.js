@@ -24,4 +24,47 @@ function getExcursions(callback) {
   callback(data);
 }
 
-export {getExcursions};
+function getThemes(callback) {
+  data =
+    [
+      {
+        name: 'Playa',
+        img: 'http://www.elblogdeyes.com/wp-content/uploads/playa.jpg'
+      },
+      {
+        name: 'Montaña',
+        img: 'http://intergatur.com.ar/wp-content/uploads/2016/08/CostaRica.jpg'
+      },
+      {
+        name: 'Crucero',
+        img: 'https://www.ecestaticos.com/imagestatic/clipping/f54/177/f54177d022003e4bc4e2dcc21c1afbfc/un-camarero-revela-como-es-la-vida-en-un-crucero-de-ricos.jpg?mtime=1490376847'
+      }
+  ];
+  callback(data);
+}
+
+function getPlaces(callback){
+
+  data =
+    [
+      {
+        name: 'Volcán Arenal, Fortuna',
+        img: 'http://www.visitcentroamerica.com/files/news_images/volcan.jpg?1343859181'
+      },
+      {
+        name: 'Parque nacional Manuel Antonio',
+        img: 'https://billbeardcostarica.com/wp-content/uploads/2015/09/PN-001.jpg'
+      },
+      {
+        name: 'Playa Conchal',
+        img: 'https://r-ec.bstatic.com/images/hotel/max1024x768/315/31597181.jpg'
+      }
+    ];
+
+  callback(data);
+}
+
+export {
+  getExcursions,
+  getThemes
+};
