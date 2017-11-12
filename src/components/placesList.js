@@ -17,22 +17,21 @@ import {
 } from 'react-native-card-view';
 
 import StarButton from './starButton';
-import {getThemes} from '../api_requests/requests';
+import {getPlaces} from '../api_requests/requests';
 
-class ThemesExcursions extends Component{
+class PlacesList extends Component{
 
   constructor(){
     super();
     this.state = {
-      themes: []
+      places: []
     }
-
   }
 
   componentDidMount(){
-    getThemes(data => {
+    getPlaces(data => {
       this.setState({
-        themes: data
+        places: data
       });
     });
   }
@@ -43,7 +42,7 @@ class ThemesExcursions extends Component{
         <View>
           <Card styles={{card: {width: 330,flex: 1,
             flexDirection: 'column', marginBottom: 30, backgroundColor: 'white'}}
-            }>
+          }>
 
             <CardTitle>
               <View style = {styles.titleContainer}>
@@ -73,7 +72,7 @@ class ThemesExcursions extends Component{
   render(){
     return(
       <View style = {styles.content}>
-        <FlatList data = {this.state.themes}
+        <FlatList data = {this.state.places}
                   renderItem = {({item}) => this._renderItem(item)}
                   showsVerticalScrollIndicator = {false}
                   style = {{marginTop: 10}}
@@ -110,5 +109,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default ThemesExcursions;
+export default PlacesList;

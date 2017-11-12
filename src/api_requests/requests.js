@@ -66,5 +66,6 @@ function getPlaces(callback){
 
 export {
   getExcursions,
-  getThemes
+  getThemes,
+  getPlaces
 };

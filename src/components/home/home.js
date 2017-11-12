@@ -13,10 +13,11 @@ import {
 
 import ListExcursions from '../listExcursions';
 import ListThemes from '../themesExcursion';
+import ListPlaces from '../placesList';
 
 const excursions = () => <ListExcursions/>
 const themes = () => <ListThemes/>;
-const places = () => <View style={{ flex: 1}} />;
+const places = () => <ListPlaces/>;
 
 class Home extends Component{
 
