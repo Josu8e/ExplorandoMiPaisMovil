@@ -17,7 +17,7 @@ class Excursion extends Component{
     return(
       <ParallaxScroll renderHeader={({ animatedValue }) => <Header title = {this.props.excursion.name}/>}
         headerHeight={50}
-        isHeaderFixed={true}
+        isHeaderFixed={false}
         parallaxHeight={250}
         useNativeDriver={false}
         isBackgroundScalable={true}
@@ -26,7 +26,7 @@ class Excursion extends Component{
         }
         fadeOutParallaxBackground={true}
         headerBackgroundColor='rgba(51, 51, 51, 0)'
-        headerFixedBackgroundColor='rgba(51, 51, 51, 0.5)'
+        headerFixedBackgroundColor='rgba(51, 51, 51, 0.2)'
         parallaxBackgroundScrollSpeed={5}>
 
         <Content info = {this.props.excursion}/>
