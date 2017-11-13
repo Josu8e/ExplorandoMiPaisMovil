@@ -17,10 +17,44 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import call from 'react-native-phone-call';
 import GalleryView from '../gallery/gallery';
 
+import {
+  obtenerEncargadoExcursion,
+  obtenerLugaresExcursion,
+  obtenerActividadesExcursion
+} from "../../api_requests/requests";
+
 class Content extends Component{
 
   state = {
-    modalVisible: false
+    modalVisible: false,
+    encargado: {},
+    lugares: [],
+    actividades: []
+  }
+
+  componentDidMount(){
+    // // Se trae la información del encargado de la excursion
+    // obtenerEncargadoExcursion(this.props.excursion.id, datos => {
+    //   console.log(datos);
+    //   this.setState({
+    //     encargado: datos
+    //   });
+    // });
+    // // Se traen las actividades de la excursion
+    // obtenerActividadesExcursion(this.props.excursion.id, datos => {
+    //   console.log(datos);
+    //   this.setState({
+    //     actividades: datos
+    //   });
+    // });
+    // // Se traen los lugares de la excursión
+    // obtenerLugaresExcursion(this.props.excursion.id, datos => {
+    //   console.log(datos);
+    //   this.setState({
+    //     lugares: datos
+    //   })
+    // });
+
   }
 
   setModalVisible(visible){
@@ -62,7 +96,9 @@ class Content extends Component{
 
             <Text style={[styles.infoText, {textAlign: 'center', marginTop: 10}]}>Temas</Text>
             <View style = {styles.themes}>
-              <Tag text = 'Nombre del Tema'/>
+              <Tag text = 'Tema # 1' style = {styles.tag}/>
+              <Tag text = 'Tema # 2' style = {styles.tag}/>
+              <Tag text = 'Tema # 3' style = {styles.tag}/>
             </View>
 
           </View>
@@ -209,6 +245,7 @@ const styles = {
   },
   themes: {
     flexDirection: 'row',
+    justifyContent: 'center'
   },
   tag: {
     marginRight: '2%'

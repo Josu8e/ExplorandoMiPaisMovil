@@ -7,7 +7,7 @@ import {
 
 const Tag = (props) => {
   return(
-    <View style = {styles.container}>
+    <View style = {[styles.container, props.style]}>
       <Text style={styles.text}>{props.text}</Text>
     </View>
   )

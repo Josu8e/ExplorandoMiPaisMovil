@@ -1,6 +1,41 @@
 import configs from './config.json';
 
-function getExcursions(callback) {
+const api_url = configs.api_url;
+
+const getBuilder = (url, callback) => {
+  fetch(url)
+    .then((response) => response.json())
+    .then(data => {
+      console.log(data);
+      callback(data);
+    })
+    .catch(error => {
+      console.log(error);
+      callback(error);
+    })
+}
+
+const postBuilder = (url, body, callback) => {
+    fetch(url, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    .then((response) => response.json())
+    .then(data => {
+      console.log(data);
+      callback(data);
+    })
+    .catch(error => {
+      console.error(error);
+      callback(error);
+    })
+}
+
+const getExcursions = (callback) => {
   // TODO: cambiar por una petición real al api
   data =
     [
@@ -21,10 +56,19 @@ function getExcursions(callback) {
         'price': 65000
       }
     ];
-  callback(data);
+    callback(data);
+  // fetch(`${api_url}/getAllExcursions`)
+  //   .then((response) => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     callback(data);
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //   })
 }
 
-function getThemes(callback) {
+const getThemes = (callback) => {
   data =
     [
       {
@@ -41,9 +85,10 @@ function getThemes(callback) {
       }
   ];
   callback(data);
+
 }
 
-function getPlaces(callback){
+const getPlaces = (callback) => {
 
   data =
     [
@@ -64,8 +109,38 @@ function getPlaces(callback){
   callback(data);
 }
 
+const obtenerEncargadoExcursion = (id, callback) => {
+  getBuilder(`${api_url}/getEncargadoExcursion/${id}`, callback);
+}
+
+const obtenerLugaresExcursion = (id, callback) => {
+  getBuilder(`${api_url}/placesByActivities/${id}`, callback);
+}
+
+const obtenerActividadesExcursion = (id, callback) => {
+  getBuilder(`${api_url}/activitiesByExcursions/${id}`, callback);
+}
+
+const registrarUsuario = (_nombre, _email, contra, callback) => {
+  let body = {
+    nombre: _nombre,
+    correo: _email,
+    contrasehna: contra
+  }
+  postBuilder(`${api_url}/craerPersona`, body, callback);
+}
+
+const login = (correo, callback) => {
+  getBuilder(`${api_url}/login/${correo}`, callback);
+}
+
 export {
   getExcursions,
   getThemes,
-  getPlaces
+  getPlaces,
+  obtenerEncargadoExcursion,
+  obtenerActividadesExcursion,
+  obtenerLugaresExcursion,
+  registrarUsuario,
+  login
 };
