@@ -1,5 +1,5 @@
 {
-  'api_url': 'http://172.19.32.10:5000',
+  'api_url': 'http://13.58.144.176:5000',
   'facebook_sdk_key': '',
   'google_sdk_key': '',
   'youtube_api_key': 'AIzaSyAjMTYCLQ02lgn3NdJJhrvys-cDamZ-cB4'

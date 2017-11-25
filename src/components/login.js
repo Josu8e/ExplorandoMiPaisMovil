@@ -141,7 +141,6 @@ class Login extends Component{
           </Text>
         </View>
 
-
         {/* Buttons */}
         <View style = {styles.buttons}>
           <Icon.Button

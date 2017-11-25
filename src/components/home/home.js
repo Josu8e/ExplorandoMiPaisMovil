@@ -4,6 +4,7 @@ import Menu from './menu';
 
 import SideMenu from 'react-native-side-menu';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import {registrarUsuario} from "../../api_requests/requests";
 
 import {
   Text,
@@ -75,7 +76,7 @@ class Home extends Component{
           {/* Header */}
           <View style={[{flex: 1}, styles.container]}>
             <Header toggle={this.toggle.bind(this)}/>
-            {/* Excursions */}
+            
             <TabViewAnimated
               style={{flex: 1, backgroundColor: '#f0f0f0'}}
               navigationState={this.state}

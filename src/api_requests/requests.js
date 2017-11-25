@@ -4,7 +4,7 @@ const api_url = configs.api_url;
 
 const getBuilder = (url, callback) => {
   fetch(url)
-    .then((response) => response.json())
+    .then(response => response.json())
     .then(data => {
       console.log(data);
       callback(data);
@@ -127,7 +127,7 @@ const registrarUsuario = (_nombre, _email, contra, callback) => {
     correo: _email,
     contrasehna: contra
   }
-  postBuilder(`${api_url}/craerPersona`, body, callback);
+  postBuilder(`${api_url}/createPerson`, body, callback);
 }
 
 const login = (correo, callback) => {
