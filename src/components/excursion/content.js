@@ -33,27 +33,6 @@ class Content extends Component{
   }
 
   componentDidMount(){
-    // // Se trae la información del encargado de la excursion
-    // obtenerEncargadoExcursion(this.props.excursion.id, datos => {
-    //   console.log(datos);
-    //   this.setState({
-    //     encargado: datos
-    //   });
-    // });
-    // // Se traen las actividades de la excursion
-    // obtenerActividadesExcursion(this.props.excursion.id, datos => {
-    //   console.log(datos);
-    //   this.setState({
-    //     actividades: datos
-    //   });
-    // });
-    // // Se traen los lugares de la excursión
-    // obtenerLugaresExcursion(this.props.excursion.id, datos => {
-    //   console.log(datos);
-    //   this.setState({
-    //     lugares: datos
-    //   })
-    // });
 
   }
 
@@ -82,14 +61,14 @@ class Content extends Component{
                 <View style = {styles.modalButton}>
                   <Text style={{color: '#fff'}}>Reservar</Text>
                 </View>
-              </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
           </View>
         </Modal>
 
         <View style = {styles.wrapper}>
-          <Text style={styles.price}>&#8353; {this.props.info.price}</Text>
+          <Text style={styles.price}>&#8353; {this.props.info.precio}</Text>
           <View style = {styles.info}>
-            <Text style={styles.infoText}>Cupo de la excursión : </Text>
+            <Text style={styles.infoText}>Cupo de la excursión : {this.props.info.cupoMax} personas</Text>
             <Text style={styles.infoText}>Estadía : </Text>
             <Text style={styles.infoText}>Fecha de salida y regreso : </Text>
             <Text style={styles.infoText}>Descripción : </Text>
@@ -142,7 +121,7 @@ class Content extends Component{
           images={[
             {
               caption: 'Remote image with supplied dimensions',
-              source: { uri: this.props.info.mainImage }
+              source: { uri: this.props.info.foto }
             },
 
           ]}

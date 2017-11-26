@@ -15,13 +15,13 @@ class Excursion extends Component{
 
   render(){
     return(
-      <ParallaxScroll renderHeader={({ animatedValue }) => <Header title = {this.props.excursion.name}/>}
+      <ParallaxScroll renderHeader={({ animatedValue }) => <Header title = {this.props.excursion.descripcion}/>}
         headerHeight={50}
         isHeaderFixed={false}
         parallaxHeight={250}
         useNativeDriver={false}
         isBackgroundScalable={true}
-        renderParallaxBackground={({ animatedValue }) => <Background source={{uri: this.props.excursion.mainImage}}
+        renderParallaxBackground={({ animatedValue }) => <Background source={{uri: this.props.excursion.foto}}
                                                                      animatedValue={animatedValue} />
         }
         fadeOutParallaxBackground={true}

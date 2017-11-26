@@ -6,7 +6,7 @@ const getBuilder = (url, callback) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      console.log('getBuilder');
       callback(data);
     })
     .catch(error => {
@@ -36,36 +36,8 @@ const postBuilder = (url, body, callback) => {
 }
 
 const getExcursions = (callback) => {
-  // TODO: cambiar por una petición real al api
-  data =
-    [
-      {
-        'name': 'Jardines de las Cataratas, Heredia, Costa Rica',
-        'quota': '25',
-        'mainImage': 'http://www.bosquedepaz.com/wp-content/uploads/2015/01/LaPaz.jpg',
-        'images': [],
-        'video_url' : 'https://youtu.be/u5SLOus_u98',
-        'price': 25000
-      },
-      {
-        'name': 'Rio Celeste, Alajuela, Costa Rica',
-        'quota': '25',
-        'mainImage': 'https://www.anywhere.com/img-a/tour/celeste-river-tenorio-volcano-adventure-arenal-costa-rica/21.jpg',
-        'images': [],
-        'video_url' : 'https://youtu.be/pHDnWGCLeVY',
-        'price': 65000
-      }
-    ];
-    callback(data);
-  // fetch(`${api_url}/getAllExcursions`)
-  //   .then((response) => response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     callback(data);
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   })
+  console.log(`${api_url}/getAllExcursions`);
+  getBuilder(`${api_url}/getAllExcursions`, callback);
 }
 
 const getThemes = (callback) => {
@@ -122,16 +94,32 @@ const obtenerActividadesExcursion = (id, callback) => {
 }
 
 const registrarUsuario = (_nombre, _email, contra, callback) => {
-  let body = {
-    nombre: _nombre,
-    correo: _email,
-    contrasehna: contra
-  }
-  postBuilder(`${api_url}/createPerson`, body, callback);
+
+  fetch(`${api_url}/createPerson`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nombre: _nombre,
+      correo: _email,
+      contrasehna: contra
+    })
+  })
+    .then((response) => response.json())
+    .then(data => {
+      console.log(data);
+      callback(data);
+    })
+    .catch(error => {
+      console.error(error);
+      callback(error);
+    })
 }
 
-const login = (correo, callback) => {
-  getBuilder(`${api_url}/login/${correo}`, callback);
+const login = (correo, password, callback) => {
+  getBuilder(`${api_url}/login/${correo}/${password}`, callback);
 }
 
 export {

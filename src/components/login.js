@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {width, height} = Dimensions.get('window');
 import {login, registrarUsuario} from "../api_requests/requests";
+import {_setItem} from "../localStorage";
 
 class Login extends Component{
 
@@ -27,18 +28,29 @@ class Login extends Component{
     this.state = {
       modalVisible: false,
       name: '',
+      register_email: '',
+      register_password: '',
       password: '',
       email: ''
-    }
+    };
   }
 
   _login(){
     let email = this.state.email;
-    if(email !== '' && password !== password){
-      login(email, response => {
-        this.setState({
-          modalVisible: false
-        })
+    let passw = this.state.password;
+    if(email !== '' && passw !== ''){
+      login(email, passw, response => {
+        if(response.succesful) {
+          this.setState({
+            modalVisible: false
+          }, () => {
+            _setItem('user', response.userData)
+          })
+          Actions.pop();
+        }
+        else{
+          ToastAndroid.show('Datos incorrectos', ToastAndroid.SHORT);
+        }
       });
     }
     else{
@@ -47,14 +59,17 @@ class Login extends Component{
   }
 
   _register(){
-    let email = this.state.email;
+    let email = this.state.register_email;
     let name = this.state.name;
-    let password = this.state.password;
+    let password = this.state.register_password;
     if(email !== '' && password !== '' && name !== ''){
-      registrarUsuario(name, email, password, response => {
-        this.setState({
-          modalVisible: false
-        })
+      registrarUsuario(name, email, password, (response) => {
+        if(response.succesful) {
+          this.setState({
+            modalVisible: false
+          })
+          Actions.pop();
+        }
       });
     }
     else {
@@ -84,16 +99,18 @@ class Login extends Component{
               <TextInput placeholder='Email'
                          keyboardType='email-address'
                          style={{color: 'white'}}
-                         onChange={(text) => this.setState({email: text})}
+                         value={this.state.email}
+                         onChangeText={(text) => this.setState({email: text})}
               />
               <TextInput placeholder='Contraseña'
                          secureTextEntry = {true}
                          style={{color: 'white'}}
-                         onChange={(text) => this.setState({password: text})}
+                         value={this.state.password}
+                         onChangeText={(text) => this.setState({password: text})}
               />
 
               <TouchableWithoutFeedback onPress = {() => {
-                Actions.pop();
+                this._login()
               }}>
                 <View style = {styles.submitButton}>
                   <Text style={{color: '#fff'}}>Ingresar</Text>
@@ -101,20 +118,25 @@ class Login extends Component{
               </TouchableWithoutFeedback>
 
               <Text style={styles.title}>o Registrarse</Text>
-              <TextInput placeholder='Nombre' style={styles.text} onChange={(text) => this.setState({name: text})}/>
+              <TextInput placeholder='Nombre'
+                         style={styles.text}
+                         value={this.state.name}
+                         onChangeText={(text) => this.setState({name: text})}/>
               <TextInput placeholder='Email'
                          keyboardType='email-address'
                          style={styles.text}
-                         onChange={(text) => this.setState({email: text})}
+                         value={this.state.register_email}
+                         onChangeText={(text) => this.setState({register_email: text})}
               />
               <TextInput placeholder='Contraseña'
                          secureTextEntry = {true}
                          style={styles.text}
-                         onChange={(text) => this.setState({password: text})}
+                         value={this.state.register_password}
+                         onChangeText={(text) => this.setState({register_password: text})}
               />
 
               <TouchableWithoutFeedback onPress = {() => {
-                Actions.pop();
+                this._register();
               }}>
                 <View style = {styles.submitButton}>
                   <Text style={{color: '#fff'}}>Registrarse</Text>

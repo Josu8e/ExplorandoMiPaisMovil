@@ -24,15 +24,29 @@ class ListExcursions extends Component{
   constructor(){
     super();
     this.state = {
-      excursions: []
+      excursions: [],
+      refreshing: false
     }
   }
 
   componentDidMount(){
-    getExcursions(data => {
+    this.getAllExcursions();
+  }
+
+  getAllExcursions(){
+    getExcursions((data) => {
       this.setState({
-        excursions: data
+        excursions: data,
+        refreshing: false
       });
+    });
+  }
+
+  refreshExcursions = () => {
+    this.setState({
+      refreshing: true
+    }, () => {
+      this.getAllExcursions();
     });
   }
 
@@ -52,11 +66,11 @@ class ListExcursions extends Component{
             <CardImage>
               <Image
                 style={{width: 350, height: 200}}
-                source={{uri: item.mainImage}}
+                source={{uri: item.foto}}
               />
             </CardImage>
             <CardTitle>
-              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.title}>{item.descripcion}</Text>
             </CardTitle>
 
           </Card>
@@ -72,6 +86,8 @@ class ListExcursions extends Component{
                   renderItem = {({item}) => this._renderItem(item)}
                   showsVerticalScrollIndicator={false}
                   style = {{marginTop: 10}}
+                  refreshing = {this.state.refreshing}
+                  onRefresh = {this.refreshExcursions}
         />
       </View>
     )
