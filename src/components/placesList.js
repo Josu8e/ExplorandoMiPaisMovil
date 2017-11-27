@@ -36,6 +36,8 @@ class PlacesList extends Component{
     });
   }
 
+  _keyExtractor = (item, index) => item.id;
+
   _renderItem(item){
     return(
       <TouchableWithoutFeedback underlayColor = 'azure'>
@@ -51,7 +53,7 @@ class PlacesList extends Component{
                   {item.name}
                 </Text>
 
-                <StarButton/>
+                <StarButton Favorite = {false}/>
 
               </View>
             </CardTitle>
@@ -76,6 +78,7 @@ class PlacesList extends Component{
                   renderItem = {({item}) => this._renderItem(item)}
                   showsVerticalScrollIndicator = {false}
                   style = {{marginTop: 10}}
+                  keyExtractor = {this._keyExtractor}
         />
       </View>
     )

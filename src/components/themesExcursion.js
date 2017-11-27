@@ -24,18 +24,34 @@ class ThemesExcursions extends Component{
   constructor(){
     super();
     this.state = {
-      themes: []
+      themes: [],
+      refreshing: false
     }
 
   }
 
   componentDidMount(){
+    this.getAllThemes();
+  }
+
+  getAllThemes(){
     getThemes(data => {
       this.setState({
-        themes: data
+        themes: data,
+        refreshing: false
       });
     });
   }
+
+  refreshExcursions = () => {
+    this.setState({
+      refreshing: true
+    }, () =>{
+      this.getAllThemes();
+    });
+  }
+
+  _keyExtractor = (item, index) => item.id;
 
   _renderItem(item){
     return(
@@ -49,10 +65,10 @@ class ThemesExcursions extends Component{
               <View style = {styles.titleContainer}>
 
                 <Text style={styles.title}>
-                  {item.name}
+                  {item.nombre}
                 </Text>
 
-                <StarButton/>
+                <StarButton Favorite = {item.favorito}/>
 
               </View>
             </CardTitle>
@@ -60,7 +76,7 @@ class ThemesExcursions extends Component{
             <CardImage>
               <Image
                 style={{width: 350, height: 200}}
-                source={{uri: item.img}}
+                source={{uri: item.foto}}
               />
             </CardImage>
 
@@ -77,6 +93,9 @@ class ThemesExcursions extends Component{
                   renderItem = {({item}) => this._renderItem(item)}
                   showsVerticalScrollIndicator = {false}
                   style = {{marginTop: 10}}
+                  refreshing = {this.state.refreshing}
+                  onRefresh = {this.refreshExcursions}
+                  keyExtractor = {this._keyExtractor}
         />
       </View>
     )

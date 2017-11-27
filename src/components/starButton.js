@@ -7,10 +7,10 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class StarButton extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      isFavorite: false
+      isFavorite: this.props.Favorite
     }
   }
 
@@ -30,7 +30,6 @@ class StarButton extends Component{
       </TouchableWithoutFeedback>
     )
   }
-
 }
 
 export default StarButton;

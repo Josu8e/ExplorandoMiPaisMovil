@@ -54,6 +54,8 @@ class ListExcursions extends Component{
     Actions.excursion({excursion: excursion});
   }
 
+  _keyExtractor = (item, index) => item.id;
+
   _renderItem(item){
     return(
       <TouchableHighlight onPress={() => {this.showExcursion(item)}}
@@ -88,6 +90,7 @@ class ListExcursions extends Component{
                   style = {{marginTop: 10}}
                   refreshing = {this.state.refreshing}
                   onRefresh = {this.refreshExcursions}
+                  keyExtractor = {this._keyExtractor}
         />
       </View>
     )

@@ -1,4 +1,5 @@
 import configs from './config.json';
+import {_getItem} from "../localStorage";
 
 const api_url = configs.api_url;
 
@@ -41,23 +42,10 @@ const getExcursions = (callback) => {
 }
 
 const getThemes = (callback) => {
-  data =
-    [
-      {
-        name: 'Playa',
-        img: 'http://www.elblogdeyes.com/wp-content/uploads/playa.jpg'
-      },
-      {
-        name: 'Montaña',
-        img: 'http://intergatur.com.ar/wp-content/uploads/2016/08/CostaRica.jpg'
-      },
-      {
-        name: 'Crucero',
-        img: 'https://www.ecestaticos.com/imagestatic/clipping/f54/177/f54177d022003e4bc4e2dcc21c1afbfc/un-camarero-revela-como-es-la-vida-en-un-crucero-de-ricos.jpg?mtime=1490376847'
-      }
-  ];
-  callback(data);
-
+  _getItem('user', (userInfo) => {
+    let userId = (userInfo === undefined) ? 1 : userInfo.id;
+    getBuilder(`${api_url}/getThemes/${userId}`, callback);
+  });
 }
 
 const getPlaces = (callback) => {
@@ -94,32 +82,28 @@ const obtenerActividadesExcursion = (id, callback) => {
 }
 
 const registrarUsuario = (_nombre, _email, contra, callback) => {
-
-  fetch(`${api_url}/createPerson`, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre: _nombre,
-      correo: _email,
-      contrasehna: contra
-    })
-  })
-    .then((response) => response.json())
-    .then(data => {
-      console.log(data);
-      callback(data);
-    })
-    .catch(error => {
-      console.error(error);
-      callback(error);
-    })
+  let body = {
+    nombre: _nombre,
+    correo: _email,
+    contrasehna: contra
+  }
+  postBuilder(`${api_url}/createPerson`, body, callback);
 }
 
 const login = (correo, password, callback) => {
   getBuilder(`${api_url}/login/${correo}/${password}`, callback);
+}
+
+const reservarExcursion = (idUsuario, idExcursion, callback) => {
+  getBuilder(`${api_url}/reservar/${idExcursion}/${idUsuario}`, callback);
+}
+
+const cancelarReserva = (idUsuario, idExcursion, callback) => {
+  getBuilder(`${api_url}/cancelarReserva/${idExcursion}/${idUsuario}`, callback);
+}
+
+const misReservaciones = (idUsuario, callback) => {
+  getBuilder(`${api_url}/misReservas/${idUsuario}`, callback);
 }
 
 export {
@@ -130,5 +114,8 @@ export {
   obtenerActividadesExcursion,
   obtenerLugaresExcursion,
   registrarUsuario,
-  login
+  login,
+  reservarExcursion,
+  misReservaciones,
+  cancelarReserva
 };

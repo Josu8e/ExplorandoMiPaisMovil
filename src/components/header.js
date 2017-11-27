@@ -21,8 +21,7 @@ export default class Header extends Component {
   styles = {
     wrapper: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
     },
     header: {
       color: '#fff',

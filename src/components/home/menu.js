@@ -37,7 +37,7 @@ class Menu extends Component{
           </TouchableHighlight>
 
           <TouchableHighlight underlayColor = 'azure'
-                              onPress={() => { }}>
+                              onPress={() => { Actions.reservas(); }}>
             <View style={styles.textItem}>
               <Text style={styles.text}>Reservas</Text>
             </View>

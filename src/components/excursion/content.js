@@ -10,6 +10,7 @@ import{
   ToastAndroid
 } from 'react-native';
 
+import {_getItem} from "../../localStorage";
 import Modal from 'react-native-modal';
 import { Actions } from 'react-native-router-flux';
 import Tag from './tag';
@@ -20,20 +21,44 @@ import GalleryView from '../gallery/gallery';
 import {
   obtenerEncargadoExcursion,
   obtenerLugaresExcursion,
-  obtenerActividadesExcursion
+  obtenerActividadesExcursion,
+  reservarExcursion
 } from "../../api_requests/requests";
 
 class Content extends Component{
 
-  state = {
-    modalVisible: false,
-    encargado: {},
-    lugares: [],
-    actividades: []
+  constructor(){
+    super();
+    this.state = {
+      modalVisible: false,
+      encargado: {},
+      lugares: [],
+      actividades: [],
+      userInfo: {}
+    }
   }
 
   componentDidMount(){
+    this.getUserInfo();
+  }
 
+  getUserInfo(){
+    _getItem('user', (userInfo) => {
+      this.setState({
+        userInfo
+      });
+    });
+  }
+
+  makeReservation(){
+    if(this.state.userInfo.id === undefined) {
+      ToastAndroid.show('Debe iniciar sesión para poder realizar reservaciones', ToastAndroid.SHORT);
+      return;
+    }
+    reservarExcursion(this.state.userInfo.id, this.props.info.id, (response) => {
+      Actions.pop();
+      ToastAndroid.show('Se registro su reserva', ToastAndroid.SHORT);
+    });
   }
 
   setModalVisible(visible){
@@ -55,8 +80,7 @@ class Content extends Component{
             <TextInput placeholder='Número de reservas' style={{width: '65%', textAlign: 'center'}} keyboardType='numeric'/>
 
             <TouchableWithoutFeedback onPress = {() => {
-                Actions.pop();
-                ToastAndroid.show('Se registro su reserva', ToastAndroid.SHORT);
+               this.makeReservation();
               }}>
                 <View style = {styles.modalButton}>
                   <Text style={{color: '#fff'}}>Reservar</Text>
@@ -170,7 +194,7 @@ const styles = {
     fontSize: 24
   },
   price: {
-    fontSize: 24,
+    color: 'black',
     textAlign: 'center'
   },
   contactButton: {
